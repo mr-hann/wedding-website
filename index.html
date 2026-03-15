@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chelsea & Tyler - Wedding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blush: '#f4e6e7',
+                        dusty: '#d4a5a5',
+                        wine: '#8b4a5c'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        .font-script {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-sans {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #f4e6e7 0%, #e8d3d3 100%);
+        }
+        
+        .section-bg {
+            background: linear-gradient(45deg, #f9f4f4 0%, #f4e6e7 100%);
+        }
+        
+        .wine-bg {
+            background: linear-gradient(135deg, #8b4a5c 0%, #a55a6b 100%);
+        }
+        
+        .photo-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .photo-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #8b4a5c;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #8b4a5c;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .rsvp-form input, .rsvp-form select {
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .rsvp-form input:focus, .rsvp-form select:focus {
+            border-color: #8b4a5c;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 74, 92, 0.1);
+        }
+        
+        .gift-card {
+            background: linear-gradient(45deg, rgba(255,255,255,0.9) 0%, rgba(248,245,245,0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 74, 92, 0.1);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="font-sans bg-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-script text-2xl text-wine font-bold">
+                    Wedflow
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-wine font-medium">HOME</a>
+                    <a href="#story" class="nav-link text-gray-700 hover:text-wine font-medium">OUR STORY</a>
+                    <a href="#details" class="nav-link text-gray-700 hover:text-wine font-medium">DETAILS</a>
+                    <a href="#photos" class="nav-link text-gray-700 hover:text-wine font-medium">PHOTOS</a>
+                    <a href="#gifts" class="nav-link text-gray-700 hover:text-wine font-medium">GIFTS</a>
+                    <a href="#rsvp" class="nav-link text-gray-700 hover:text-wine font-medium">RSVP</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-wine">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-wine font-medium">HOME</a>
+                <a href="#story" class="block px-3 py-2 text-gray-700 hover:text-wine font-medium">OUR STORY</a>
+                <a href="#details" class="block px-3 py-2 text-gray-700 hover:text-wine font-medium">DETAILS</a>
+                <a href="#photos" class="block px-3 py-2 text-gray-700 hover:text-wine font-medium">PHOTOS</a>
+                <a href="#gifts" class="block px-3 py-2 text-gray-700 hover:text-wine font-medium">GIFTS</a>
+                <a href="#rsvp" class="block px-3 py-2 text-gray-700 hover:text-wine font-medium">RSVP</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen hero-bg flex items-center justify-center relative overflow-hidden mt-10">
+        <div class="absolute top-0 right-0 p-8 text-sm text-gray-600 text-center">
+            <div class="font-medium">THE 15TH</div>
+            <div class="font-medium">DECEMBER 2024</div>
+            <div class="text-xs mt-1">2024</div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <div class="text-sm text-gray-600 mb-2">TOGETHER</div>
+                    <div class="text-sm text-gray-600">FOREVER & BEYOND</div>
+                </div>
+                
+                <div class="relative mb-12">
+                    <h1 class="font-script text-8xl md:text-9xl lg:text-[12rem] text-wine leading-none animate-float">
+                        Marv
+                    </h1>
+                    <div class="absolute top-1/2 right-0 transform -translate-y-1/2 animate-float" style="animation-delay: -2s">
+                        <h1 class="font-script text-8xl md:text-9xl lg:text-[12rem] text-wine leading-none">
+                            Yomi
+                        </h1>
+                    </div>
+                </div>
+                
+                <!-- Couple Image Placeholder -->
+                <div class="w-80 h-96 mx-auto bg-gray-200 rounded-lg shadow-lg mb-8 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-500">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="animate-bounce">
+                <svg class="w-6 h-6 text-wine" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="story" class="py-20 section-bg">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left Column -->
+                    <div class="space-y-8">
+                        <div>
+                            <h2 class="font-script text-5xl text-wine mb-8">Our Story</h2>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                The lovely couple started dating after they got to know each other when they were kids. 
+                                He started to truly fall for her when they spent summer together playing games and 
+                                exploring the county he finally took the step to ask her out, 
+                                and she said yes to his great delight.
+                            </p>
+                        </div>
+                        
+                        <!-- Timeline -->
+                        <div class="grid grid-cols-2 gap-8">
+                            <div class="text-center">
+                                <div class="font-script text-4xl text-wine mb-2">Jul 09</div>
+                                <div class="text-sm text-gray-600">
+                                    First "friends" sleepover since school, as tiny. It became a tradition 
+                                    when dad asked about each other after evening activities. 
+                                    Then decided to help with babysitting, and now dating started 
+                                    with dad, and friends decided to talk about it to their parents. 
+                                    Maximum visits and not said her that sure.
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <div class="font-script text-4xl text-wine mb-2">Jan 22</div>
+                                <div class="text-sm text-gray-600">
+                                    Now Friends Welcomed! Sending our old boyfriends watch activities 
+                                    became out-and-about. Our beautiful daughters became part of having 
+                                    and children about to become about her. The one-on-one time and 
+                                    just gave along the social media, boyfriend to close to the parents or 
+                                    together for hours throughout days about dreams. Then she loved 
+                                    doing that. and sometimes through out about her as well...
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <h3 class="font-script text-2xl text-wine mb-4">OUR PROMISE</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Photo -->
+                    <div class="flex justify-center">
+                        <div class="w-80 h-96 bg-gray-200 rounded-lg shadow-lg photo-hover overflow-hidden">
+                            <div class="h-full flex items-center justify-center text-gray-500">
+                                <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wedding Details Section -->
+    <section id="details" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-script text-5xl text-wine mb-12">Wedding Details</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Ceremony -->
+                    <div class="space-y-6">
+                        <div class="w-16 h-16 bg-wine rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-script text-3xl text-wine">Ceremony</h3>
+                        <div class="space-y-3 text-gray-600">
+                            <p class="font-medium">salvation ministry</p>
+                            <p>123 Wedding Avenue<br>port harcourt</p>
+                            <p class="font-medium">November 15, 2025</p>
+                            <p>4:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Reception -->
+                    <div class="space-y-6">
+                        <div class="w-16 h-16 bg-wine rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-script text-3xl text-wine">Reception</h3>
+                        <div class="space-y-3 text-gray-600">
+                            <p class="font-medium">Grand Ballroom</p>
+                            <p>456 Celebration Street<br>Beautiful City, BC 12345</p>
+                            <p class="font-medium">November 15, 2025</p>
+                            <p>6:00 PM - Late</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dress Code -->
+                <div class="mt-16 p-8 bg-blush rounded-lg">
+                    <h3 class="font-script text-2xl text-wine mb-4">Dress Code</h3>
+                    <p class="text-gray-600">Cocktail Attire - We kindly request no white or ivory colors</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="photos" class="py-20 wine-bg">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="font-script text-5xl text-white mb-4">Memories</h2>
+                    <p class="text-pink-100">A glimpse into our journey together</p>
+                </div>
+                
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Photo placeholders -->
+                    <div class="aspect-square bg-white/20 rounded-lg photo-hover overflow-hidden">
+                        <div class="h-full flex items-center justify-center text-white/50">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="aspect-square bg-white/20 rounded-lg photo-hover overflow-hidden">
+                        <div class="h-full flex items-center justify-center text-white/50">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="aspect-square bg-white/20 rounded-lg photo-hover overflow-hidden col-span-2 md:col-span-1">
+                        <div class="h-full flex items-center justify-center text-white/50">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="aspect-square bg-white/20 rounded-lg photo-hover overflow-hidden">
+                        <div class="h-full flex items-center justify-center text-white/50">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="aspect-square bg-white/20 rounded-lg photo-hover overflow-hidden col-span-2">
+                        <div class="h-full flex items-center justify-center text-white/50">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="aspect-square bg-white/20 rounded-lg photo-hover overflow-hidden">
+                        <div class="h-full flex items-center justify-center text-white/50">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="aspect-square bg-white/20 rounded-lg photo-hover overflow-hidden">
+                        <div class="h-full flex items-center justify-center text-white/50">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gifts & Registry Section -->
+    <section id="gifts" class="py-20 section-bg">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-script text-5xl text-wine mb-8">Gifts & Registry</h2>
+                <p class="text-gray-600 mb-12 text-lg">
+                    Your presence at our wedding is the greatest gift of all. However, if you would like to honor us with a gift, 
+                    we have registered at a few of our favorite places.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <!-- Registry Card 1 -->
+                    <div class="gift-card p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-wine rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5M6 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM20 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-script text-2xl text-wine mb-4">Target</h3>
+                        <p class="text-gray-600 mb-6">Find everything we need to start our new home together</p>
+                        <button onclick="openRegistry('target')" class="bg-wine text-white px-6 py-3 rounded-lg hover:bg-wine/90 transition-colors font-medium">
+                            View Registry
+                        </button>
+                    </div>
+                    
+                    <!-- Registry Card 2 -->
+                    <div class="gift-card p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-wine rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-script text-2xl text-wine mb-4">Williams Sonoma</h3>
+                        <p class="text-gray-600 mb-6">Beautiful kitchenware and home essentials for cooking together</p>
+                        <button onclick="openRegistry('williams-sonoma')" class="bg-wine text-white px-6 py-3 rounded-lg hover:bg-wine/90 transition-colors font-medium">
+                            View Registry
+                        </button>
+                    </div>
+                    
+                    <!-- Registry Card 3 -->
+                    <div class="gift-card p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 md:col-span-2 lg:col-span-1">
+                        <div class="w-16 h-16 bg-wine rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-script text-2xl text-wine mb-4">Cash Gift</h3>
+                        <p class="text-gray-600 mb-6">Help us create memories on our honeymoon adventure</p>
+                        <button onclick="openRegistry('cash')" class="bg-wine text-white px-6 py-3 rounded-lg hover:bg-wine/90 transition-colors font-medium">
+                            Contribute
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Thank You Message -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="font-script text-2xl text-wine mb-4">Thank You</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        We are so grateful for your love, support, and friendship as we begin this new chapter. 
+                        Whether you choose to give a gift from our registry or simply celebrate with us, 
+                        your presence means the world to us. Thank you for being part of our special day!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="font-script text-5xl text-wine mb-4">RSVP</h2>
+                    <p class="text-gray-600">Kindly respond by Cctober 10th, 2025</p>
+                </div>
+                
+                <form class="rsvp-form space-y-6 bg-blush p-8 rounde
