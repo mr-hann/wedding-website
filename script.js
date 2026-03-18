@@ -2,9 +2,9 @@ tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        blush: '#f4e6e7',
+                        blush: '#ece7e8',
                         dusty: '#d4a5a5',
-                        wine: '#8b4a5c'
+                        wine: '#a17f7a'
                     }
                 }
             }

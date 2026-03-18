@@ -1,11 +1,11 @@
  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap');
         :root{
-            --hero-color:linear-gradient(135deg, #f4e6e7 0%, #e8d3d3 100%) ;
+            --hero-color:linear-gradient(135deg, #ddc5bdf1 0%, #e4d4cff5 100%) ;
             --section-bg-color:linear-gradient(45deg, #f9f4f4 0%, #f4e6e7 100%) ;
-            --white-bg-color:linear-gradient(135deg, #8b4a5c 0%, #a55a6b 100%) ;
-            --link-hover:#8b4a5c;
-            --link-after:#8b4a5c;
-            --rsvp-border-color:#8b4a5c ;
+            --white-bg-color:linear-gradient(135deg, #a17f7a 0%, #ceaca1 100%) ;
+            --link-hover:#a17f7a;
+            --link-after:#a17f7a;
+            --rsvp-border-color:#a17f7a ;
             --card-bg-color:linear-gradient(45deg, rgba(255,255,255,0.9) 0%, rgba(248,245,245,0.9) 100%) ;
         }
         .font-script {
