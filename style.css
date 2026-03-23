@@ -174,13 +174,13 @@
         }
          /* Read More functionality */
         .story-text {
-            max-height: 120px;
+            max-height: 220px;
             overflow: hidden;
             transition: max-height 0.5s ease;
         }
 
         .story-text.expanded {
-            max-height: 1000px;
+            max-height: 2000px;
         }
 
         .read-more-btn {
