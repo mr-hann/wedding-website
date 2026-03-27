@@ -5,10 +5,209 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abayomi and Marvellous- Wedding</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add these BEFORE your custom script -->
+    <script type="module" src="firebase.js"></script>
     <script src="script.js"></script>
     <link href="style.css" rel="stylesheet"></link>
 </head>
 <body class="font-sans bg-white overflow-x-hidden">
+<!-- Modal Content -->
+ <!-- Modal Container -->
+<div class="fixed inset-0 z-50 overflow-y-auto hidden" id="cashGiftModal">
+    
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    
+    <div class="flex min-h-full items-center justify-center p-4 sm:p-6">
+        
+        <div class="relative transform overflow-hidden rounded-2xl bg-white shadow-xl transition-all w-full max-w-2xl my-8">
+        <div class="flex items-center justify-center min-h-screen p-4" >
+            <div class="modal-content relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-auto">
+                
+                <!-- Modal Header -->
+                <div class="bg-gradient-to-r from-wine to-dusty p-6 text-white relative">
+                    <button onclick="closeCashGiftModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-script text-3xl mb-2">Send a Cash Gift</h3>
+                        <p class="text-white/90 text-sm">Your generosity means the world to us</p>
+                    </div>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="p-8">
+                    <!-- Thank You Message -->
+                    <div class="bg-blush/30 rounded-xl p-4 mb-6 border border-wine/10">
+                        <p class="text-gray-700 text-center leading-relaxed">
+                            Thank you for your generous gift! You can send your contribution to any of the accounts below. 
+                            <span class="font-semibold">💝</span>
+                        </p>
+                    </div>
+
+                    <!-- Account Details -->
+                    <div class="space-y-4">
+                        
+                        <!-- Account 1 - Bank Transfer -->
+                        <div class="account-card bg-gradient-to-br from-white to-blush/20 rounded-xl p-6 border-2 border-wine/10 shadow-md">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-wine rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 text-lg">Bank Transfer</h4>
+                                        <p class="text-sm text-gray-500">Primary Account</p>
+                                    </div>
+                                </div>
+                                <span class="bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
+                                    Recommended
+                                </span>
+                            </div>
+
+                            <!-- Bank Name -->
+                            <div class="mb-3">
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">Bank Name</label>
+                                <div class="bg-white rounded-lg p-3 border border-gray-200">
+                                    <p class="font-semibold text-gray-800">First Bank</p>
+                                </div>
+                            </div>
+
+                            <!-- Account Name -->
+                            <div class="mb-3">
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">Account Name</label>
+                                <div class="bg-white rounded-lg p-3 border border-gray-200">
+                                    <p class="font-semibold text-gray-800 capitalize">marvellous iwara john</p>
+                                </div>
+                            </div>
+
+                            <!-- Account Number with Copy -->
+                            <div>
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">Account Number</label>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex-1 bg-white rounded-lg p-3 border border-gray-200">
+                                        <p id="accountNumber1" class="font-mono font-bold text-gray-800 text-lg tracking-wider">
+                                            3181195974
+                                        </p>
+                                    </div>
+                                    <button 
+                                        onclick="copyToClipboard('accountNumber1', 'copyBtn1')" 
+                                        id="copyBtn1"
+                                        class="copy-btn bg-wine text-white px-4 py-3 rounded-lg hover:bg-wine/90 transition-all flex items-center gap-2 font-medium"
+                                    >
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                        <span>Copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account 2 - Mobile Money -->
+                        <div class="account-card bg-gradient-to-br from-white to-blush/20 rounded-xl p-6 border-2 border-wine/10 shadow-md">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-dusty rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 text-lg">Mobile Money</h4>
+                                        <p class="text-sm text-gray-500">Alternative Option</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Provider Name -->
+                            <div class="mb-3">
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">Provider</label>
+                                <div class="bg-white rounded-lg p-3 border border-gray-200">
+                                    <p class="font-semibold text-gray-800">Opay</p>
+                                </div>
+                            </div>
+
+                            <!-- Account Name -->
+                            <div class="mb-3">
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">Account Name</label>
+                                <div class="bg-white rounded-lg p-3 border border-gray-200">
+                                    <p class="font-semibold text-gray-800">Marvellous Iwara John</p>
+                                </div>
+                            </div>
+
+                            <!-- Phone Number with Copy -->
+                            <div>
+                                <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">Account Number</label>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex-1 bg-white rounded-lg p-3 border border-gray-200">
+                                        <p id="accountNumber2" class="font-mono font-bold text-gray-800 text-lg tracking-wider">
+                                            6105106815
+                                        </p>
+                                    </div>
+                                    <button 
+                                        onclick="copyToClipboard('accountNumber2', 'copyBtn2')" 
+                                        id="copyBtn2"
+                                        class="copy-btn bg-dusty text-white px-4 py-3 rounded-lg hover:bg-dusty/90 transition-all flex items-center gap-2 font-medium"
+                                    >
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                        <span>Copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                    <!-- Footer Note -->
+                    <div class="mt-6 bg-gradient-to-r from-wine/5 to-dusty/5 rounded-xl p-4 border border-wine/10">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-wine flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                <span class="font-semibold">Note:</span> After making your transfer, you can optionally send us a screenshot or confirmation to 
+                                <a href="http://wa.me/message/EL6HV6JRWSAZC1" class="text-wine font-semibold hover:underline">WhatsApp number 09161454230</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
+                    <button 
+                        onclick="closeCashGiftModal()" 
+                        class="w-full bg-white text-gray-700 border-2 border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium"
+                    >
+                        Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden items-center gap-3 z-50">
+        <svg class="w-5 h-5 checkmark-animation" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span class="font-medium">Copied to clipboard!</span>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -376,7 +575,7 @@
                         </div>
                         <h3 class="font-script text-2xl text-wine mb-4">Target</h3>
                         <p class="text-gray-600 mb-6">Find everything we need to start our new home together</p>
-                        <a href="https://www.jumia.com.ng/tools-home-improvement/#catalog-listing" class="bg-wine text-white px-6 py-3 rounded-lg hover:bg-wine/90 transition-colors font-medium">
+                        <a href="https://www.jumia.com.ng/cart/" class="bg-wine text-white px-6 py-3 rounded-lg hover:bg-wine/90 transition-colors font-medium">
                             View Registry
                         </a>
                     </div>
@@ -396,7 +595,7 @@
                     </div>
                     
                     <!-- Registry Card 3 -->
-                    <div class="gift-card p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 md:col-span-2 lg:col-span-1">
+                    <div class="gift-card p-8 rounded-xl shadow-lg  transition-all duration-300 transform hover:-translate-y-2 md:col-span-2 lg:col-span-1">
                         <div class="w-16 h-16 bg-wine rounded-full flex items-center justify-center mx-auto mb-6">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -404,7 +603,7 @@
                         </div>
                         <h3 class="font-script text-2xl text-wine mb-4">Cash Gift</h3>
                         <p class="text-gray-600 mb-6">Help us create memories on our honeymoon adventure</p>
-                        <button onclick="openRegistry('cash')" class="bg-wine text-white px-6 py-3 rounded-lg hover:bg-wine/90 transition-colors font-medium">
+                       <button onclick="openCashGiftModal()" class="bg-wine text-white px-6 py-3 rounded-lg hover:bg-wine/90 transition-colors font-medium">
                             Contribute
                         </button>
                     </div>
@@ -432,7 +631,7 @@
                     <p class="text-gray-600">Kindly respond by March 25, 2026</p>
                 </div>
                                
-        <form class="rsvp-form space-y-6 bg-blush p-8 rounded-xl shadow-lg">
+        <form class="rsvp-form space-y-6 bg-blush p-8 rounded-xl shadow-lg" id="rsvpForm">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
@@ -485,9 +684,10 @@
                     </div>
                     
                     <button type="submit" 
-                            class="w-full bg-wine text-white py-4 px-6 rounded-lg hover:bg-wine/90 transition-colors font-medium text-lg">
+                            class="w-full bg-wine text-white py-4 px-6 rounded-lg hover:bg-wine/90 transition-colors font-medium text-lg" id="rsvpSubmitBtn">
                         Send RSVP
                     </button>
+                    <div id="rsvpAlert" class="hidden"></div>
             </form>
                 
                 <!-- Contact Info -->
@@ -525,7 +725,7 @@
                 <div id="scrollMode" class="relative">
                     <!-- Scroll Container -->
                     <div id="messagesScrollContainer" class="messages-scroll-container pb-6">
-                        <div class="flex gap-6" style="width: max-content;">
+                        <div class="flex gap-6" id="messages-container" style="width: max-content;">
                             <!-- Message Cards (same as before) - 8 cards total -->
                             <div class="w-80 md:w-96 flex-shrink-0">
                                 <div class="bg-white rounded-xl shadow-lg p-8 h-full hover:shadow-xl transition-shadow">
@@ -539,12 +739,6 @@
                                     <p class="text-gray-600 leading-relaxed italic">
                                         "Congratulations to the most beautiful couple! Watching your love story unfold has been such a joy. Wishing you a lifetime of happiness, laughter, and endless adventures together. Can't wait to celebrate with you!"
                                     </p>
-                                    <div class="mt-4 flex items-center text-wine">
-                                        <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-                                        </svg>
-                                        <span class="text-sm">12</span>
-                                    </div>
                                 </div>
                             </div>
 
@@ -589,111 +783,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="w-80 md:w-96 flex-shrink-0">
-                                <div class="bg-white rounded-xl shadow-lg p-8 h-full hover:shadow-xl transition-shadow">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-12 h-12 bg-dusty rounded-full flex items-center justify-center text-white font-bold mr-4">DW</div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800">David Wilson</h4>
-                                            <p class="text-sm text-gray-500">1 week ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="text-gray-600 leading-relaxed italic">
-                                        "From the moment I met you both, I knew you were meant to be together. Your love radiates joy and warmth. Congratulations on finding your perfect match. Can't wait to celebrate!"
-                                    </p>
-                                    <div class="mt-4 flex items-center text-wine">
-                                        <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-                                        </svg>
-                                        <span class="text-sm">15</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="w-80 md:w-96 flex-shrink-0">
-                                <div class="bg-white rounded-xl shadow-lg p-8 h-full hover:shadow-xl transition-shadow">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-12 h-12 bg-wine rounded-full flex items-center justify-center text-white font-bold mr-4">LT</div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800">Lisa Thompson</h4>
-                                            <p class="text-sm text-gray-500">1 week ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="text-gray-600 leading-relaxed italic">
-                                        "Tears of joy! You two are absolutely perfect together. May your love continue to grow stronger with each passing day. Wishing you all the happiness in the world. Love you both so much!"
-                                    </p>
-                                    <div class="mt-4 flex items-center text-wine">
-                                        <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-                                        </svg>
-                                        <span class="text-sm">22</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="w-80 md:w-96 flex-shrink-0">
-                                <div class="bg-white rounded-xl shadow-lg p-8 h-full hover:shadow-xl transition-shadow">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-12 h-12 bg-dusty rounded-full flex items-center justify-center text-white font-bold mr-4">JB</div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800">James Brown</h4>
-                                            <p class="text-sm text-gray-500">2 weeks ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="text-gray-600 leading-relaxed italic">
-                                        "Congratulations! Your wedding day will be wonderful, but your marriage will be even better. May God bless your union with love, joy, and companionship for all the years of your lives. Cheers!"
-                                    </p>
-                                    <div class="mt-4 flex items-center text-wine">
-                                        <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-                                        </svg>
-                                        <span class="text-sm">19</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="w-80 md:w-96 flex-shrink-0">
-                                <div class="bg-white rounded-xl shadow-lg p-8 h-full hover:shadow-xl transition-shadow">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-12 h-12 bg-wine rounded-full flex items-center justify-center text-white font-bold mr-4">AL</div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800">Amanda Lee</h4>
-                                            <p class="text-sm text-gray-500">2 weeks ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="text-gray-600 leading-relaxed italic">
-                                        "To my favorite couple! Your journey together is truly inspiring. May every day be filled with love, joy, and beautiful moments. Congratulations on your special day!"
-                                    </p>
-                                    <div class="mt-4 flex items-center text-wine">
-                                        <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-                                        </svg>
-                                        <span class="text-sm">28</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="w-80 md:w-96 flex-shrink-0">
-                                <div class="bg-white rounded-xl shadow-lg p-8 h-full hover:shadow-xl transition-shadow">
-                                    <div class="flex items-center mb-4">
-                                        <div class="w-12 h-12 bg-dusty rounded-full flex items-center justify-center text-white font-bold mr-4">RC</div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800">Robert Chen</h4>
-                                            <p class="text-sm text-gray-500">3 weeks ago</p>
-                                        </div>
-                                    </div>
-                                    <p class="text-gray-600 leading-relaxed italic">
-                                        "Wishing you both a lifetime of love and happiness! May your bond grow stronger with each passing year. So thrilled to celebrate this amazing milestone with you both!"
-                                    </p>
-                                    <div class="mt-4 flex items-center text-wine">
-                                        <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
-                                        </svg>
-                                        <span class="text-sm">31</span>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -796,5 +886,6 @@
     </footer>
 
     <script src="nav.js"></script>
+    <script type="module" src="firebase.js" ></script>
 </body>
 </html>

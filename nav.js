@@ -36,14 +36,6 @@
             }
         });
 
-        // RSVP form submission
-        document.querySelector('.rsvp-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your RSVP! We have received your response and are so excited to celebrate with you.');
-            this.reset();
-            guestCountDiv.classList.add('hidden');
-            dietaryDiv.classList.add('hidden');
-        });
 
         // Registry button functions
         function openRegistry(type) {
@@ -365,3 +357,127 @@
                 readMoreIcon.style.transform = 'rotate(0deg)';
             }
         });
+
+
+      // ========================================
+        // MODAL FUNCTIONS
+        // ========================================
+
+        function openCashGiftModal() {
+            const modal = document.getElementById('cashGiftModal');
+            modal.classList.remove('hidden');
+            //document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeCashGiftModal() {
+            const modal = document.getElementById('cashGiftModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCashGiftModal();
+            }
+        });
+
+        // ========================================
+        // COPY TO CLIPBOARD FUNCTION
+        // ========================================
+
+        function copyToClipboard(textElementId, buttonId) {
+            // Get the text to copy
+            const textElement = document.getElementById(textElementId);
+            const text = textElement.textContent.trim();
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(text).then(function() {
+                // Success - show feedback
+                const button = document.getElementById(buttonId);
+                const originalHTML = button.innerHTML;
+                
+                // Change button to success state
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg class="w-5 h-5 checkmark-animation" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Copied!</span>
+                `;
+                
+                // Show toast notification
+                showToast();
+                
+                // Reset button after 2 seconds
+                setTimeout(function() {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalHTML;
+                }, 2000);
+                
+            }).catch(function(err) {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy. Please try selecting and copying manually.');
+            });
+        }
+
+        // ========================================
+        // TOAST NOTIFICATION
+        // ========================================
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            
+            // Hide after 3 seconds
+            setTimeout(function() {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3000);
+        }
+
+        // ========================================
+        // ALTERNATIVE: Fallback for older browsers
+        // ========================================
+
+        function copyToClipboardFallback(textElementId, buttonId) {
+            const textElement = document.getElementById(textElementId);
+            const text = textElement.textContent.trim();
+            
+            // Create temporary input
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            
+            // Select and copy
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // For mobile
+            
+            try {
+                document.execCommand('copy');
+                showToast();
+                
+                // Update button
+                const button = document.getElementById(buttonId);
+                const originalHTML = button.innerHTML;
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Copied!</span>
+                `;
+                
+                setTimeout(function() {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalHTML;
+                }, 2000);
+                
+            } catch (err) {
+                alert('Failed to copy. Please try selecting and copying manually.');
+            }
+            
+            // Remove temporary input
+            document.body.removeChild(tempInput);
+        }
